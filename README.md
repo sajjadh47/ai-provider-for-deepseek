@@ -58,6 +58,22 @@ If successful, click Activate Plugin to activate it, or Return to Plugin Install
 
 Visit the [DeepSeek Platform](https://platform.deepseek.com/) to create an account and generate an API key.
 
+## External Services
+This plugin connects to the DeepSeek API (https://api.deepseek.com/v1) to provide AI capabilities within WordPress. It is required to enable text generation, function calling, web search, and dynamic model discovery features.
+
+**What data is sent and when:**
+- Your DeepSeek API key is sent with every request to authenticate with the service.
+- Any text prompts, messages, or content you submit for AI processing are sent to DeepSeek's servers.
+- A request is made to the DeepSeek API to fetch available models when the plugin initializes.
+- Data is only transmitted when AI features are actively used (e.g., generating text, calling functions, or performing web searches).
+
+**Service provider:** DeepSeek
+- Website: [https://www.deepseek.com/](https://www.deepseek.com/)
+- API Base URL: [https://api.deepseek.com/v1](https://api.deepseek.com/v1)
+- Terms of Use: [https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html](https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html)
+- Privacy Policy: [https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html](https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html)
+- Terms of Service: [https://cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html](https://cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html)
+
 ## Screenshots
 
 ### 1. Connectors Page.

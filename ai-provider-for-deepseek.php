@@ -32,15 +32,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.0' );
-define( 'AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.0' );
+define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Autoloader.
 spl_autoload_register(
 	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.classFound
 	function ( string $class ): void {
 		$prefix   = 'Sajjad67\AiProviderForDeepSeek\\';
-		$base_dir = AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR . 'src/';
+		$base_dir = AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR . 'src/';
 
 		if ( strncmp( $prefix, $class, strlen( $prefix ) ) !== 0 ) {
 			return;

@@ -93,7 +93,7 @@ class DeepSeekProvider extends AbstractApiProvider {
 
 		// Provider logoPath support was added in 1.3.0.
 		if ( version_compare( AiClient::VERSION, '1.3.0', '>=' ) ) {
-			$provider_metadata_args[] = AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR . 'assets/images/deepseek.svg';
+			$provider_metadata_args[] = AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR . 'assets/images/deepseek.svg';
 		}
 
 		return new ProviderMetadata( ...$provider_metadata_args );
