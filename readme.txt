@@ -4,7 +4,7 @@ Contributors: sajjad67
 Author: Sajjad Hossain Sagor
 Tested up to: 7.0
 Requires at least: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,9 @@ This plugin connects to the DeepSeek API (https://api.deepseek.com/v1) to provid
 1. Connectors Page.
 
 == Changelog ==
+= 1.0.1 =
+- Fix: pass `reasoning_content` back to the DeepSeek API on subsequent turns of a thinking-mode tool-call conversation. Without this, multi-turn agent workflows on `deepseek-v4-pro`, `deepseek-v4-flash` (thinking mode), and the legacy `deepseek-reasoner` alias failed with `400 - The reasoning_content in the thinking mode must be passed back to the API`. See https://api-docs.deepseek.com/guides/thinking_mode#tool-calls.
+
 = 1.0.0 =
 - Initial release.
 
