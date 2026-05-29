@@ -111,6 +111,8 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 		$map = array(
 			'deepseek-chat'     => 'DeepSeek-V3 (Chat)',
 			'deepseek-reasoner' => 'DeepSeek-R1 (Reasoner)',
+			'deepseek-v4-flash' => 'DeepSeek-V4-Flash',
+			'deepseek-v4-pro'   => 'DeepSeek-V4-Pro',
 		);
 
 		return $map[ $id ] ?? ucwords( str_replace( array( '-', '_' ), ' ', $id ) );
@@ -134,6 +136,8 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 		$priority = array(
 			'deepseek-chat'     => 1,
 			'deepseek-reasoner' => 2,
+			'deepseek-v4-flash' => 3,
+			'deepseek-v4-pro'   => 4,
 		);
 
 		$a_priority = $priority[ $a_id ] ?? 99;

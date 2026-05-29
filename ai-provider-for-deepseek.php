@@ -8,7 +8,7 @@
  * Plugin Name:       AI Provider For DeepSeek
  * Plugin URI:        https://wordpress.org/plugins/ai-provider-for-deepseek/
  * Description:       DeepSeek AI provider for the PHP AI Client SDK.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.9
  * Requires PHP:      7.4
  * Author:            Sajjad Hossain Sagor
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.0' );
+define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.1' );
 define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Autoloader.
