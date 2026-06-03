@@ -67,7 +67,7 @@ class DeepSeekTextGenerationModel extends AbstractOpenAiCompatibleTextGeneration
 	 * we override here: keep the base class's content/tool_calls shape and add
 	 * the `reasoning_content` sibling field on every assistant entry.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param  list<Message>       $prompt The prompt to generate text for.
 	 * @return array<string,mixed>         The parameters for the API request.
