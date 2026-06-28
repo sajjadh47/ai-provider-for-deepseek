@@ -12,6 +12,8 @@ declare( strict_types=1 );
 namespace Sajjad67\AiProviderForDeepSeek\Models;
 
 use Sajjad67\AiProviderForDeepSeek\Provider\DeepSeekProvider;
+use WordPress\AiClient\Messages\DTO\Message;
+use WordPress\AiClient\Messages\Enums\MessageRoleEnum;
 use WordPress\AiClient\Providers\Http\DTO\Request;
 use WordPress\AiClient\Providers\Http\Enums\HttpMethodEnum;
 use WordPress\AiClient\Providers\OpenAiCompatibleImplementation\AbstractOpenAiCompatibleTextGenerationModel;
@@ -41,5 +43,65 @@ class DeepSeekTextGenerationModel extends AbstractOpenAiCompatibleTextGeneration
 			$data,
 			$this->getRequestOptions()
 		);
+	}
+
+	/**
+	 * Re-attaches `reasoning_content` to prior assistant turns.
+	 *
+	 * See https://api-docs.deepseek.com/guides/thinking_mode#tool-calls.
+	 *
+	 * @param  list<Message>       $prompt The prompt to generate text for.
+	 * @return array<string,mixed>         The parameters for the API request.
+	 */
+	protected function prepareGenerateTextParams( array $prompt ): array {
+		$params = parent::prepareGenerateTextParams( $prompt );
+
+		if ( ! isset( $params['messages'] ) || ! is_array( $params['messages'] ) ) {
+			return $params;
+		}
+
+		$thoughts = array();
+		foreach ( $prompt as $message ) {
+			if ( ! $message instanceof Message ) {
+				continue;
+			}
+			if ( $message->getRole() !== MessageRoleEnum::model() ) {
+				continue;
+			}
+
+			$parts = $message->getParts();
+			if ( count( $parts ) === 1 && $parts[0]->getType()->isFunctionResponse() ) {
+				continue;
+			}
+
+			$thought = '';
+			foreach ( $parts as $part ) {
+				if ( $part->getType()->isText() && $part->getChannel()->isThought() ) {
+					$thought .= $part->getText();
+				}
+			}
+			$thoughts[] = $thought;
+		}
+
+		$idx = 0;
+		foreach ( $params['messages'] as $wire_index => $entry ) {
+			if ( ! is_array( $entry ) || ! isset( $entry['role'] ) || 'assistant' !== $entry['role'] ) {
+				continue;
+			}
+			if ( ! isset( $thoughts[ $idx ] ) ) {
+				break;
+			}
+
+			$thought = $thoughts[ $idx ];
+			++$idx;
+
+			if ( '' === $thought ) {
+				continue;
+			}
+
+			$params['messages'][ $wire_index ]['reasoning_content'] = $thought;
+		}
+
+		return $params;
 	}
 }
