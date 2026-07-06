@@ -8,7 +8,7 @@
  * Plugin Name:       AI Provider For DeepSeek
  * Plugin URI:        https://wordpress.org/plugins/ai-provider-for-deepseek/
  * Description:       DeepSeek AI provider for the PHP AI Client SDK.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.9
  * Requires PHP:      7.4
  * Author:            Sajjad Hossain Sagor
@@ -32,21 +32,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.1' );
+define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_VERSION', '1.0.2' );
 define( 'AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Autoloader.
 spl_autoload_register(
 	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.classFound
-	function ( string $class ): void {
+	static function ( string $class ): void {
 		$prefix   = 'Sajjad67\AiProviderForDeepSeek\\';
 		$base_dir = AIPRFD_AI_PROVIDER_FOR_DEEPSEEK_PLUGIN_DIR . 'src/';
+		$len      = strlen( $prefix );
 
-		if ( strncmp( $prefix, $class, strlen( $prefix ) ) !== 0 ) {
+		if ( strncmp( $class, $prefix, strlen( $prefix ) ) !== 0 ) {
 			return;
 		}
 
-		$relative_class = substr( $class, strlen( $prefix ) );
+		$relative_class = substr( $class, $len );
 		$file           = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
 
 		if ( file_exists( $file ) ) {

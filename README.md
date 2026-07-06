@@ -82,6 +82,9 @@ This plugin connects to the DeepSeek API (https://api.deepseek.com/v1) to provid
 
 ## Changelog
 
+### 1.0.2
+- Fix: pass reasoning_content back on thinking-mode tool calls.
+
 ### 1.0.1
 - Added v4 New Models.
 

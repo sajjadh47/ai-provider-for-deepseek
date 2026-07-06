@@ -15,6 +15,7 @@ use Sajjad67\AiProviderForDeepSeek\Provider\DeepSeekProvider;
 use WordPress\AiClient\Messages\DTO\Message;
 use WordPress\AiClient\Messages\Enums\MessageRoleEnum;
 use WordPress\AiClient\Providers\Http\DTO\Request;
+use WordPress\AiClient\Providers\Http\DTO\RequestOptions;
 use WordPress\AiClient\Providers\Http\Enums\HttpMethodEnum;
 use WordPress\AiClient\Providers\OpenAiCompatibleImplementation\AbstractOpenAiCompatibleTextGenerationModel;
 
@@ -35,13 +36,23 @@ class DeepSeekTextGenerationModel extends AbstractOpenAiCompatibleTextGeneration
 	 * @return Request                 The constructed Request object.
 	 */
 	protected function createRequest( HttpMethodEnum $method, string $path, array $headers = array(), $data = null ): Request {
+		$existing = $this->getRequestOptions();
+		$options  = null !== $existing
+			? RequestOptions::fromArray( $existing->toArray() )
+			: new RequestOptions();
+
+		// Sometimes inference is slow; force a generous timeout. only set if absent.
+		if ( $options->getTimeout() === null ) {
+			$options->setTimeout( 120.0 );
+		}
+
 		// DeepSeek supports OpenAI-compatible endpoints at /v1/.
 		return new Request(
 			$method,
 			DeepSeekProvider::url( $path ),
 			$headers,
 			$data,
-			$this->getRequestOptions()
+			$options
 		);
 	}
 
@@ -50,8 +61,8 @@ class DeepSeekTextGenerationModel extends AbstractOpenAiCompatibleTextGeneration
 	 *
 	 * See https://api-docs.deepseek.com/guides/thinking_mode#tool-calls.
 	 *
-	 * @param  list<Message>       $prompt The prompt to generate text for.
-	 * @return array<string,mixed>         The parameters for the API request.
+	 * @param  array $prompt The prompt to generate text for.
+	 * @return array         The parameters for the API request.
 	 */
 	protected function prepareGenerateTextParams( array $prompt ): array {
 		$params = parent::prepareGenerateTextParams( $prompt );

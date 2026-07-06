@@ -4,7 +4,7 @@ Contributors: sajjad67
 Author: Sajjad Hossain Sagor
 Tested up to: 7.0
 Requires at least: 6.9
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,8 @@ This plugin connects to the DeepSeek API (https://api.deepseek.com/v1) to provid
 1. Connectors Page.
 
 == Changelog ==
+= 1.0.2 =
+- Fix: pass reasoning_content back on thinking-mode tool calls.
 = 1.0.1 =
 - Added v4 New Models.
 = 1.0.0 =
