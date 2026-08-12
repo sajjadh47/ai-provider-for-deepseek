@@ -64,6 +64,7 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 		// Options shared by all text models.
 		$base_text_options = array(
 			new SupportedOption( OptionEnum::systemInstruction() ),
+			new SupportedOption( OptionEnum::functionDeclarations() ),
 			new SupportedOption( OptionEnum::maxTokens() ),
 			new SupportedOption( OptionEnum::temperature() ),
 			new SupportedOption( OptionEnum::topP() ),
@@ -80,17 +81,11 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 			function ( array $model_data ) use ( $base_text_options ): ModelMetadata {
 				$model_id = $model_data['id'];
 
-				// Text models (Chat and Reasoner).
-				$options = $base_text_options;
-				if ( str_contains( $model_id, 'chat' ) ) {
-					$options[] = new SupportedOption( OptionEnum::functionDeclarations() );
-				}
-
 				return new ModelMetadata(
 					$model_id,
 					self::formatDisplayName( $model_id ),
 					array( CapabilityEnum::textGeneration(), CapabilityEnum::chatHistory() ),
-					$options
+					$base_text_options
 				);
 			},
 			$models_data
