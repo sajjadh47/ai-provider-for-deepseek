@@ -104,8 +104,6 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 	 */
 	private static function formatDisplayName( string $id ): string {
 		$map = array(
-			'deepseek-chat'     => 'DeepSeek-V3 (Chat)',
-			'deepseek-reasoner' => 'DeepSeek-R1 (Reasoner)',
 			'deepseek-v4-flash' => 'DeepSeek-V4-Flash',
 			'deepseek-v4-pro'   => 'DeepSeek-V4-Pro',
 		);
@@ -129,10 +127,8 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
 
 		// Pin Flagship models to the top.
 		$priority = array(
-			'deepseek-chat'     => 1,
-			'deepseek-reasoner' => 2,
-			'deepseek-v4-flash' => 3,
-			'deepseek-v4-pro'   => 4,
+			'deepseek-v4-flash' => 1,
+			'deepseek-v4-pro'   => 2,
 		);
 
 		$a_priority = $priority[ $a_id ] ?? 99;

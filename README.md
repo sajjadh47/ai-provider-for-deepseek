@@ -3,7 +3,7 @@
 [![Plugin Banner](https://ps.w.org/ai-provider-for-deepseek/assets/banner-1544x500.png)](https://wordpress.org/plugins/ai-provider-for-deepseek/)
 
 **Tags:** ai, deepseek, gpt, artificial-intelligence, connector \
-**Tested up to:** 7.0 \
+**Tested up to:** 7.1 \
 **Requires PHP:** 7.4
 
 AI Provider for DeepSeek for the PHP AI Client SDK.
@@ -81,6 +81,9 @@ This plugin connects to the DeepSeek API (https://api.deepseek.com/v1) to provid
 ![Connectors Page.](https://ps.w.org/ai-provider-for-deepseek/assets/screenshot-1.png)
 
 ## Changelog
+
+### 1.0.3
+- Fix: Function calling silently broken. Removed deprecated models.
 
 ### 1.0.2
 - Fix: pass reasoning_content back on thinking-mode tool calls.
